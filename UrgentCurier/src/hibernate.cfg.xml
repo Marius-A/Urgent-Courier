@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+ 
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database connection settings -->
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/courier</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">mxv2c47</property>
+        
+        <!-- JDBC connection pool (use the built-in) -->
+        <property name="connection.pool_size">1</property>
+        
+        <!-- SQL dialect -->
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+
+        <!-- Disable the second-level cache  -->
+        <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+        
+        <!-- Echo all executed SQL to stdout -->
+        <property name="show_sql">true</property>
+
+        <!-- Drop the existing tables and create new one -->
+        <property name="hbm2ddl.auto">update</property>
+ 
+        <!-- Mention here all the model classes along with their package name -->
+ 		<mapping class="ro.go.mariusiliescu.entities.persoane.Persoana"/>
+ 		<mapping class="ro.go.mariusiliescu.entities.persoane.Angajat"/>
+ 		<mapping class="ro.go.mariusiliescu.entities.persoane.Client"/>
+ 		<mapping class="ro.go.mariusiliescu.entities.Comanda"/>
+ 		<mapping class="ro.go.mariusiliescu.entities.Companie"/>
+ 		<mapping class="ro.go.mariusiliescu.entities.persoane.Curier"/>
+ 		<mapping class="ro.go.mariusiliescu.entities.Cursa"/>
+ 		<mapping class="ro.go.mariusiliescu.entities.persoane.Destinatar"/>
+ 		<mapping class="ro.go.mariusiliescu.entities.Factura"/>
+ 		<mapping class="ro.go.mariusiliescu.entities.Pachet"/>
+ 		<mapping class="ro.go.mariusiliescu.entities.persoane.PersoanaExpeditoare"/>
+ 		<mapping class="ro.go.mariusiliescu.entities.persoane.Receptioner"/>
+ 		<mapping class="ro.go.mariusiliescu.entities.Ruta"/>
+ 		<mapping class="ro.go.mariusiliescu.entities.Sediu"/>
+ 		<mapping class="ro.go.mariusiliescu.entities.Vehicul"/>
+ 		
+ 		 
+    </session-factory>
+</hibernate-configuration>
