@@ -27,21 +27,21 @@
         <property name="hbm2ddl.auto">update</property>
  
         <!-- Mention here all the model classes along with their package name -->
- 		<mapping class="ro.go.mariusiliescu.entities.persoane.Persoana"/>
- 		<mapping class="ro.go.mariusiliescu.entities.persoane.Angajat"/>
- 		<mapping class="ro.go.mariusiliescu.entities.persoane.Client"/>
- 		<mapping class="ro.go.mariusiliescu.entities.Comanda"/>
- 		<mapping class="ro.go.mariusiliescu.entities.Companie"/>
- 		<mapping class="ro.go.mariusiliescu.entities.persoane.Curier"/>
- 		<mapping class="ro.go.mariusiliescu.entities.Cursa"/>
- 		<mapping class="ro.go.mariusiliescu.entities.persoane.Destinatar"/>
- 		<mapping class="ro.go.mariusiliescu.entities.Factura"/>
- 		<mapping class="ro.go.mariusiliescu.entities.Pachet"/>
- 		<mapping class="ro.go.mariusiliescu.entities.persoane.PersoanaExpeditoare"/>
- 		<mapping class="ro.go.mariusiliescu.entities.persoane.Receptioner"/>
- 		<mapping class="ro.go.mariusiliescu.entities.Ruta"/>
- 		<mapping class="ro.go.mariusiliescu.entities.Sediu"/>
- 		<mapping class="ro.go.mariusiliescu.entities.Vehicul"/>
+ 		<mapping class="com.mariusiliescu.model.entities.persoane.Persoana"/>
+ 		<mapping class="com.mariusiliescu.model.entities.persoane.Angajat"/>
+ 		<mapping class="com.mariusiliescu.model.entities.persoane.Client"/>
+ 		<mapping class="com.mariusiliescu.model.entities.Comanda"/>
+ 		<mapping class="com.mariusiliescu.model.entities.Companie"/>
+ 		<mapping class="com.mariusiliescu.model.entities.persoane.Curier"/>
+ 		<mapping class="com.mariusiliescu.model.entities.Cursa"/>
+ 		<mapping class="com.mariusiliescu.model.entities.persoane.Destinatar"/>
+ 		<mapping class="com.mariusiliescu.model.entities.Factura"/>
+ 		<mapping class="com.mariusiliescu.model.entities.Pachet"/>
+ 		<mapping class="com.mariusiliescu.model.entities.persoane.PersoanaExpeditoare"/>
+ 		<mapping class="com.mariusiliescu.model.entities.persoane.Receptioner"/>
+ 		<mapping class="com.mariusiliescu.model.entities.Ruta"/>
+ 		<mapping class="com.mariusiliescu.model.entities.Sediu"/>
+ 		<mapping class="com.mariusiliescu.model.entities.Vehicul"/>
  		
  		 
     </session-factory>
