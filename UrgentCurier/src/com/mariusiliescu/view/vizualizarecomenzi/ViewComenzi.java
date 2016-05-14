@@ -1,20 +1,25 @@
 package com.mariusiliescu.view.vizualizarecomenzi;
 
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 
+import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
-
+import javax.swing.ListSelectionModel;
 
 import net.proteanit.sql.DbUtils;
 
 import javax.swing.JComboBox;
+import javax.swing.JMenuItem;
 import javax.swing.JTextField;
 
 public class ViewComenzi extends JPanel {
@@ -25,15 +30,27 @@ public class ViewComenzi extends JPanel {
 	private JTable table;
 	private JTextField searchedKey;
 	private JComboBox<String> comboBox;
+    private JPopupMenu menuT;
+	private JMenuItem[] menuModel;
 	
 	public ViewComenzi() {
 		initComponents();
 		setLayout();
+		addTableClickListener();
 	}
 	private void initComponents(){
+		final String[] combomboModel = new String[]{"id_client","codComanda"};
+		menuModel = new JMenuItem[]{new JMenuItem("Arata factura"),new JMenuItem("Arata client")};
+		
+		menuT = new JPopupMenu();
+		for(JMenuItem m : menuModel)
+			menuT.add(m);
+		
 		table = new JTable();
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
 		searchedKey = new JTextField();
-		comboBox = new JComboBox<String>(new String[]{"id_client","codComanda"});
+		comboBox = new JComboBox<String>(combomboModel);
 	}
 	private void setLayout(){
 		JScrollPane scrollPane = new JScrollPane();
@@ -83,7 +100,40 @@ public class ViewComenzi extends JPanel {
 		panel.setLayout(gl_panel);
 		this.setLayout(groupLayout);
 	}
-	
+	public void addTableClickListener(){
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				int r = table.rowAtPoint(e.getPoint());
+		        if (r >= 0 && r < table.getRowCount()) {
+		            table.setRowSelectionInterval(r, r);
+		        } else {
+		            table.clearSelection();
+		        }
+
+		        int rowindex = table.getSelectedRow();
+		        if (rowindex < 0)
+		            return;
+				if ( e.getButton() == 3 ){ // 1-left, 2-middle, 3-right button
+	                ViewComenzi.this.menuT.show(e.getComponent(), e.getX(), e.getY());
+	            }
+			}		
+		});
+	}
+	public void addMenuComenziListener(ActionListener[] listeners){
+		int i=0;
+		for(JMenuItem m : menuModel){
+			m.addActionListener(listeners[i]);
+			i++;
+		}
+	}
+	public String getSelectedRowClientId(){
+		
+		int row =table.getSelectedRow();
+		
+		System.out.println(table.getValueAt(row,5).toString());
+		return table.getValueAt(row,5).toString();
+	}
 	public void setTableModel(ResultSet rs){
 		table.setModel(DbUtils.resultSetToTableModel(rs));
 	}

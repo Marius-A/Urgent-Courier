@@ -92,6 +92,22 @@ public class VizualizareComenzi extends JPanel {
 		rdbtnPachete.addActionListener(lis);
 		rdbtnComenzi.addActionListener(lis);
 	}
+	public void setSelButton(int n){
+		switch (n) {
+		case 1:
+			rdbtnComenzi.setSelected(true);
+			break;
+		case 2:
+			rdbtnPachete.setSelected(true);
+			break;
+		case 3:
+			rdbtnClienti.setSelected(true);
+			break;
+
+		default:
+			break;
+		}
+	}
 	public ViewComenzi getViewComenzi(){
 		return comenzi;
 	}
@@ -103,5 +119,9 @@ public class VizualizareComenzi extends JPanel {
 	}
 	public void showPanel(String s){
 		cLayout.show(tabPanel,s);
+	}
+	
+	public void addMenuComenziListener(ActionListener[] listeners){
+		comenzi.addMenuComenziListener(listeners);
 	}
 }

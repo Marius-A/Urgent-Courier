@@ -66,6 +66,7 @@ public class MainInterface extends JFrame {
 		addOrders = new JPanel();
 		cLayout = new CardLayout();
 		toolBar = new JToolBar();
+		toolBar.setFloatable(false);
 		
 		adaugareClient = new FormularAdaugareClient();
 		adaugareComanda = new FormularAdaugareComanda();

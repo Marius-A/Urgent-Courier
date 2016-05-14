@@ -78,7 +78,14 @@ public class ViewClienti extends JPanel {
 		);
 		setLayout(groupLayout);
 	}
-	
+	public void hilightRowWithClientId(String clientId){
+		for(int i=0 ; i<tableCompany.getRowCount() ; i++){
+			System.out.println(tableCompany.getValueAt(i, 0).toString());
+			if(tableCompany.getValueAt(i, 0).toString().equals(clientId)){
+				tableCompany.setRowSelectionInterval(i,i);
+			}
+		}
+	}
 	public void setTableCompanieModel(ResultSet rs){
 		tableCompany.setModel(DbUtils.resultSetToTableModel(rs));
 	}

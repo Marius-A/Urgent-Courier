@@ -33,6 +33,24 @@ public class ViewManageController implements Observer {
 				}
 			}
 		});
+		
+		view.getViewComenzi().addMenuComenziListener(new ActionListener[]{new ActionListener() {
+			
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					System.out.println("Arata factuta");
+				}
+			}, new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					view.showPanel("3");
+					view.setSelButton(3);
+					String idClinet = view.getViewComenzi().getSelectedRowClientId();
+					view.getViewClienti().hilightRowWithClientId(idClinet);
+				}
+			}	
+		});
 	}
 
 	@Override
