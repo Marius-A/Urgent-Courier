@@ -134,6 +134,12 @@ public class ViewComenzi extends JPanel {
 		System.out.println(table.getValueAt(row,5).toString());
 		return table.getValueAt(row,5).toString();
 	}
+	public String getSelectedRowOderId(){
+		
+		int row =table.getSelectedRow();
+
+		return table.getValueAt(row,0).toString();
+	}
 	public void setTableModel(ResultSet rs){
 		table.setModel(DbUtils.resultSetToTableModel(rs));
 	}

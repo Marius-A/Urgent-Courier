@@ -32,6 +32,17 @@ public class Receptioner extends Angajat {
 	}
 	
 	
+	@Override
+	public String toString() {
+		return ""+
+			   "<br/><b>Id_Angajat : </b>" + idAngajat + 
+			   "<br/><b>Nume : </b>" + nume + prenume + 
+			   "<br/><b>E-Mail : </b>" + eMail+
+			   "<br/><b>Nr. telefon : </b>" + nrTelefon +
+			   "";
+	}
+
+
 	public Receptioner(Angajat a) {
 		super(a);
 	}

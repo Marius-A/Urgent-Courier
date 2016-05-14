@@ -5,5 +5,7 @@
 	<classpathentry exported="true" kind="lib" path="D:/Google Drive/Workspace/Java/PharmaProductsManagement/lib/mysql-connector-java-5.0.8-bin.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Hibernate_lib"/>
 	<classpathentry kind="lib" path="C:/Users/maryu/Downloads/rs2xml.jar"/>
+	<classpathentry kind="lib" path="lib/itextpdf-5.5.9.jar"/>
+	<classpathentry kind="lib" path="lib/xmlworker-5.5.9.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -42,6 +42,8 @@ public abstract class Client {
 	
 	public abstract String getNume();
 	
+	public abstract String getSSNCUI();
+	
 	public abstract String getPassword();
 	
 	public abstract void adaugareFactura(Factura f);

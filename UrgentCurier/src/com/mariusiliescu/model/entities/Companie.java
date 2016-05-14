@@ -113,5 +113,10 @@ public class Companie extends Client {
 	public void adaugareFactura(Factura f) {
 		this.listaFacturi.add(f);
 	}
+
+	@Override
+	public String getSSNCUI() {
+		return cui;
+	}
 		
 }

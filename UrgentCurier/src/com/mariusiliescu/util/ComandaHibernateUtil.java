@@ -106,6 +106,11 @@ public class ComandaHibernateUtil {
 		List<Destinatar> list = hibernateTools.getSession().createCriteria(Destinatar.class).list();
 		return list;
 	}
+
+	public  Comanda getComanda(long idComanda){
+		Comanda c = (Comanda) hibernateTools.getSession().get(Comanda.class, idComanda);
+		return c;
+	}
 	public <T> void save(T obj){
 		hibernateTools.save(obj);
 	}
