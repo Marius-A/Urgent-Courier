@@ -8,6 +8,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import com.mariusiliescu.model.entities.Comanda;
 import com.mariusiliescu.model.entities.Pachet;
 import com.mariusiliescu.model.entities.SpecialConditions;
 import com.mariusiliescu.model.entities.StarePachet;
@@ -71,7 +72,8 @@ public class PacketDetails extends JPanel {
 		setLayout(groupLayout);
 	}
 	
-	public Pachet getPacketDetails(Destinatar dst){
+	public Pachet getPacketDetails(Destinatar dst , Comanda c){
+		//TODO salvare comanda
 		return new Pachet(Float.parseFloat(weight.getText()), dimensions.getDimensions(),(SpecialConditions)specialCondition.getSelectedItem(),StarePachet.inCursDeExpediere, dst);
 	}
 	

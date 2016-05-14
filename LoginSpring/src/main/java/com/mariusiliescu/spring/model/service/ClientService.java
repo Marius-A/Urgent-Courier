@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.mariusiliescu.spring.dao.ClientDao;
 import com.mariusiliescu.spring.model.entities.persoane.Client;
 

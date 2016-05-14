@@ -24,11 +24,11 @@ import com.mariusiliescu.spring.model.entities.persoane.Destinatar;
 import com.mariusiliescu.spring.model.entities.persoane.Receptioner;
 
 @Repository("DBRepository")
-@Transactional
 public class ClientDao {
 
 	@PersistenceContext
-    private EntityManager entityManager;
+	EntityManager entityManager;
+
 	
 	public long countClients() {
         return entityManager.createQuery("SELECT COUNT(o) FROM client o", Long.class).getSingleResult();
@@ -93,7 +93,6 @@ public class ClientDao {
         return c;
     }
 	
-	@Transactional
 	public void adaugareFacturi(){
 		Client cl = new Companie();
 		HashSet<Pachet> p = new HashSet<Pachet>();

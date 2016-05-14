@@ -75,6 +75,9 @@ public class VizualizatePacheteTmp extends JPanel {
 	public void setModel(Model listP){
 		list.setModel(new CustomListModel(listP));
 	}
+	public void resetJList(){
+		((CustomListModel)list.getModel()).deleteAllElements();
+	}
 	
 	public void btnAdaugareComandaListener(ActionListener lis){
 		btnAdaugareComanda.addActionListener(lis);

@@ -2,6 +2,7 @@ package com.mariusiliescu.util;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -23,7 +24,7 @@ public class ComandaHibernateUtil {
 	HibernateTools hibernateTools = new HibernateTools();
 	
 	public void addComanda(Comanda c){
-		for(Pachet p : c.getListaPachete()){
+/*		for(Pachet p : c.getListaPachete()){
 			if(!destinatarulExista(p.getDestinatar())){
 				hibernateTools.save(p.getDestinatar());//salvam destinatarii
 			}
@@ -34,11 +35,22 @@ public class ComandaHibernateUtil {
 				hibernateTools.save((Companie)c.getExpeditor());//salvam compania expeditoare
 			}
 		}
-		/*if(c.getExpeditor() instanceof PersoanaExpeditoare){
+		if(c.getExpeditor() instanceof PersoanaExpeditoare){
 			if(!persFizicaExpExista((PersoanaExpeditoare)c.getExpeditor())){
 				hibernateTools.save((PersoanaExpeditoare)c.getExpeditor());//salvam persoana fizica expeditoare
 			}
 		}*/
+		List<Destinatar> listaDestinatariExistenti = getDestinatari();
+		List<Destinatar> listaDestinatariInserati = new ArrayList<>();
+		for(Pachet p : c.getListaPachete()){
+			for(Destinatar d : listaDestinatariExistenti){
+				if(!d.getCnp().equals(p.getDestinatar().getCnp())){
+					listaDestinatariInserati.add(p.getDestinatar());
+				}
+			}
+		}
+		for(Destinatar d : listaDestinatariInserati)
+			hibernateTools.save(d);
 		hibernateTools.save(c);
 	}
 	
@@ -76,6 +88,7 @@ public class ComandaHibernateUtil {
         
         return !q.getResultList().isEmpty();
 	}
+	
 	public List<Comanda> getComenzi(){
 		return entityManager.createQuery("SELECT o FROM Comanda o", Comanda.class).getResultList();
 	}
@@ -88,8 +101,10 @@ public class ComandaHibernateUtil {
 	public  List<Companie> getCompanii(){
 		return entityManager.createQuery("SELECT o FROM Companie o", Companie.class).getResultList();
 	}
+	@SuppressWarnings("unchecked")
 	public  List<Destinatar> getDestinatari(){
-		return entityManager.createQuery("SELECT o FROM Destinatar o", Destinatar.class).getResultList();
+		List<Destinatar> list = hibernateTools.getSession().createCriteria(Destinatar.class).list();
+		return list;
 	}
 	public <T> void save(T obj){
 		hibernateTools.save(obj);

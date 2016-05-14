@@ -38,7 +38,7 @@ public class LoginController {
     public String verifyLogin(@RequestParam String userId, 
     		@RequestParam String password, HttpSession session, Model model) {
         
-		customerService.adaugareFacturi();
+		//customerService.adaugareFacturi();
 		
 		Client customer = customerService.loginClient(userId, password);
 		if (customer == null) {

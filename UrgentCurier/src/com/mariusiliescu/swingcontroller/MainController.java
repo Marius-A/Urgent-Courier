@@ -3,6 +3,8 @@ package com.mariusiliescu.swingcontroller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
+import java.util.Observable;
+
 import javax.swing.JOptionPane;
 
 import com.mariusiliescu.Model;
@@ -10,7 +12,7 @@ import com.mariusiliescu.model.entities.Comanda;
 import com.mariusiliescu.util.ComandaHibernateUtil;
 import com.mariusiliescu.view.MainInterface;
 
-public class MainController {
+public class MainController extends Observable{
 	private ComandaHibernateUtil  hibernateUtil;
 	
 	public MainController(MainInterface view , Model model){
@@ -19,14 +21,16 @@ public class MainController {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				Comanda c = new Comanda(new Date(),new Date(),model.getListaPachete().size()*10,model.getListaPachete(), view.getClient());
 				if(view.esteFormularulDestinataruluiCompletat()){
-					if(view.getPackList().size() == 0){
+				
+					if(view.getPackList(c).size() == 0){
 						JOptionPane.showMessageDialog(view,
 	                            "Adaugati cel putin un pachet",
 	                            "Pachet ",
 	                            JOptionPane.ERROR_MESSAGE);
 					}else{
-						model.adaugareListaPachet(view.getPackList());
+						model.adaugareListaPachet(view.getPackList(c));
 						view.setModel(model);
 						view.resetPackListPanelFields();
 					}
@@ -53,6 +57,8 @@ public class MainController {
 						Comanda c = new Comanda(new Date(),new Date(),model.getListaPachete().size()*10,model.getListaPachete(), view.getClient());
 						model.adaugareComanda(c);
 						hibernateUtil.addComanda(c);
+						view.resetJList();
+						MainController.this.notifyObservers();
 						model.getListaPachete().removeAll(model.getListaPachete());
 						view.resetPackListPanelFields();
 						view.resetClientFields();

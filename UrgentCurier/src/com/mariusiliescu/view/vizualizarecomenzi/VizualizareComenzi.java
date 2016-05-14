@@ -92,7 +92,6 @@ public class VizualizareComenzi extends JPanel {
 		rdbtnPachete.addActionListener(lis);
 		rdbtnComenzi.addActionListener(lis);
 	}
-	
 	public ViewComenzi getViewComenzi(){
 		return comenzi;
 	}

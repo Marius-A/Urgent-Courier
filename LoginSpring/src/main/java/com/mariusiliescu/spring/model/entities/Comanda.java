@@ -125,4 +125,12 @@ public class Comanda {
 	public void setExpeditor(Client expeditor) {
 		this.expeditor = expeditor;
 	}
+
+	@Override
+	public String toString() {
+		return "Comanda [codComanda=" + codComanda + ", numarProduse=" + numarProduse + ", dataPreluare=" + dataPreluare
+				+ ", dataExpediere=" + dataExpediere + ", costTransport=" + costTransport + ", expeditor=" + expeditor
+				+ "]";
+	}
+	
 }

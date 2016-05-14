@@ -9,6 +9,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import com.mariusiliescu.model.entities.Comanda;
 import com.mariusiliescu.model.entities.Pachet;
 
 @SuppressWarnings("serial")
@@ -51,8 +52,8 @@ public class FormularAdaugareComanda extends JPanel {
 		setLayout(groupLayout);
 	}
 	
-	public ArrayList<Pachet> getPackList(){
-		return selectPacketNum.getPackList(detaliiDestinatar.getDestinatar());
+	public ArrayList<Pachet> getPackList(Comanda c){
+		return selectPacketNum.getPackList(detaliiDestinatar.getDestinatar(),c);
 	}
 	public void butonAdaugarePachetListener(ActionListener lis){
 		selectPacketNum.butonAdaugarePachetListener(lis);

@@ -18,4 +18,7 @@ public class CustomListModel extends DefaultListModel<Pachet>{
 			addElement(p);
 		}
 	}
+	public void deleteAllElements(){
+		this.removeAllElements();
+	}
 }

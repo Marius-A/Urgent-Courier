@@ -20,6 +20,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.TitledBorder;
 
+import com.mariusiliescu.model.entities.Comanda;
 import com.mariusiliescu.model.entities.Pachet;
 import com.mariusiliescu.model.entities.persoane.Destinatar;
 
@@ -146,11 +147,11 @@ public class SelectPacketNum extends JPanel{
 		});
 	}
 	
-	public ArrayList<Pachet> getPackList(Destinatar d){
+	public ArrayList<Pachet> getPackList(Destinatar d , Comanda c){
 		ArrayList<Pachet> listPack = new ArrayList<>();
 		for(PacketDetails p : packDetList){
 			if(p.areAllFieldsCompleted())
-				listPack.add(p.getPacketDetails(d));
+				listPack.add(p.getPacketDetails(d,c));
 		}
 		return listPack;
 	}

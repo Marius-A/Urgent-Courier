@@ -28,7 +28,18 @@
 							<ul>
 								<c:forEach var="fact" items="${loggedInUser.listaFacturi}">
 	
-									<li>${fact}</li>
+									<li class="form-control">
+										${fact.valoareTotala} ; ${fact.codFactura} ;
+										${fact.intemeietor.nume} ; ${fact.comanda}	
+										<ul>
+											<c:forEach var="pac" items="${fact.comanda.listaPachete}">
+												<li class="form-control">
+													${pac} 
+												</li>
+											</c:forEach>
+										</ul>
+										
+									</li>
 	
 								</c:forEach>
 							</ul>

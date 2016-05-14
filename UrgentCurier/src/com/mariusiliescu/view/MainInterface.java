@@ -18,6 +18,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import com.mariusiliescu.Model;
+import com.mariusiliescu.model.entities.Comanda;
 import com.mariusiliescu.model.entities.Pachet;
 import com.mariusiliescu.model.entities.persoane.Client;
 import com.mariusiliescu.view.adugare.client.FormularAdaugareClient;
@@ -74,6 +75,8 @@ public class MainInterface extends JFrame {
 		back.setFont(new Font("Tahoma", Font.BOLD, 18));
 		next = new JButton("-->");
 		next.setFont(new Font("Tahoma", Font.BOLD, 18));
+		
+		tabbedPane.setTabPlacement(JTabbedPane.LEFT);
 	}
 	
 	private void setLayout(){
@@ -152,6 +155,9 @@ public class MainInterface extends JFrame {
 			}
 		});
 	}
+	public void resetJList(){
+		vizualizatePacheteTmp.resetJList();
+	}
 	public VizualizareComenzi getVizualizareComenzi(){
 		return manageOrders;
 	}
@@ -163,8 +169,8 @@ public class MainInterface extends JFrame {
 		vizualizatePacheteTmp.btnAdaugareComandaListener(lis);
 	}
 	
-	public ArrayList<Pachet> getPackList(){
-		return adaugareComanda.getPackList();
+	public ArrayList<Pachet> getPackList(Comanda c){
+		return adaugareComanda.getPackList(c);
 	}
 	
 	public Client getClient(){
