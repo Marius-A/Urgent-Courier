@@ -37,12 +37,12 @@ public class Pachet {
 	@Column(name="stare_pachet")
 	private StarePachet starePachet;
 	
-	@ManyToOne
-    @JoinColumn(name="id_destinatar")
+	@ManyToOne(fetch = FetchType.LAZY )
+    @JoinColumn(name="idDestinatar")
 	private Destinatar destinatar;
 
 	@ManyToOne(fetch = FetchType.LAZY )
-    @JoinColumn(name="cod_comanda")
+    @JoinColumn(name="codcomanda")
 	private Comanda comanda;
 	
 	
@@ -63,6 +63,7 @@ public class Pachet {
 		this.conditiiSpeciale = p.conditiiSpeciale;
 		this.starePachet = p.starePachet;
 		this.destinatar = p.destinatar;
+		this.comanda = p.comanda;
 	}
 	
 	public Pachet() {
@@ -72,6 +73,7 @@ public class Pachet {
 		this.conditiiSpeciale = SpecialConditions.precious;
 		this.starePachet = StarePachet.inCursDeExpediere;
 		this.destinatar = new Destinatar();
+		this.comanda = new Comanda();
 	}
 	
 	

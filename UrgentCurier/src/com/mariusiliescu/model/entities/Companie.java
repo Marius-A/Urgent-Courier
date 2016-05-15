@@ -12,7 +12,7 @@ import com.mariusiliescu.model.entities.persoane.Client;
 
 
 @Entity
-@Table(name= "companie")
+@Table(name= "Companie")
 @PrimaryKeyJoinColumn(name="id_client")
 public class Companie extends Client {
 	

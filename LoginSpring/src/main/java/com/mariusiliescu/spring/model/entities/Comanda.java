@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -37,7 +38,7 @@ public class Comanda {
     @Column(name = "costtransport")
 	private float costTransport;
 	
-	@OneToMany(mappedBy="comanda" , cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="comanda" , fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	private Set<Pachet> listaPachete;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -77,6 +78,12 @@ public class Comanda {
 		return listaPachete;
 	}
 
+
+	@Override
+	public String toString() {
+		return "Numar Produse :" + numarProduse + ", Data Preluare :" + dataPreluare + ", Data Expediere : "
+				+ dataExpediere + ", expeditor:"+expeditor.getNume()+" "+expeditor.getSSNCUI();
+	}
 
 	public long getCodComanda() {
 		return codComanda;
@@ -125,12 +132,4 @@ public class Comanda {
 	public void setExpeditor(Client expeditor) {
 		this.expeditor = expeditor;
 	}
-
-	@Override
-	public String toString() {
-		return "Comanda [codComanda=" + codComanda + ", numarProduse=" + numarProduse + ", dataPreluare=" + dataPreluare
-				+ ", dataExpediere=" + dataExpediere + ", costTransport=" + costTransport + ", expeditor=" + expeditor
-				+ "]";
-	}
-	
 }

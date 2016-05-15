@@ -4,16 +4,14 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Embeddable;
 import javax.persistence.Transient;
-import javax.validation.constraints.NotNull;
+
 
 @Embeddable
 @Access(AccessType.PROPERTY)
 public class LoginData {
 	@Transient
 	private Boolean isLogged;
-	@NotNull
 	private String username;
-	@NotNull
 	private String password;
 	
 	public LoginData(final String username , final String password){

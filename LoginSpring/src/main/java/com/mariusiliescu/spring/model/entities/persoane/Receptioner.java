@@ -10,10 +10,9 @@ import javax.persistence.Table;
 import com.mariusiliescu.spring.model.entities.Adresa;
 import com.mariusiliescu.spring.model.entities.LoginData;
 
-
 @Entity
 @Table(name= "receptioner")
-@PrimaryKeyJoinColumn(name="id_angajat")
+@PrimaryKeyJoinColumn(name="idAngajat")
 public class Receptioner extends Angajat {
 
 	@Embedded
@@ -32,6 +31,17 @@ public class Receptioner extends Angajat {
 	}
 	
 	
+	@Override
+	public String toString() {
+		return ""+
+			   "<br/><b>Id_Angajat : </b>" + idAngajat + 
+			   "<br/><b>Nume : </b>" + nume + prenume + 
+			   "<br/><b>E-Mail : </b>" + eMail+
+			   "<br/><b>Nr. telefon : </b>" + nrTelefon +
+			   "";
+	}
+
+
 	public Receptioner(Angajat a) {
 		super(a);
 	}

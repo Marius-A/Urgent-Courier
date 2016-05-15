@@ -38,7 +38,7 @@ public class Pachet {
 	private StarePachet starePachet;
 	
 	@ManyToOne(fetch = FetchType.LAZY )
-    @JoinColumn(name="person_id")
+    @JoinColumn(name="idDestinatar")
 	private Destinatar destinatar;
 
 	@ManyToOne(fetch = FetchType.LAZY )

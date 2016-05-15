@@ -1,17 +1,25 @@
 package com.mariusiliescu.spring.model.entities.persoane;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.mariusiliescu.spring.model.entities.Adresa;
 
 
+
 @Entity
 @Table(name= "destinatar")
-@PrimaryKeyJoinColumn(name="person_id")
 public class Destinatar extends Persoana {
-		
+	@Id
+	@GeneratedValue
+	private long idDestinatar;
+   /* @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "HB_SEQ_POJO_ONE")
+	@Column(name = "id_destinatar")
+    @AttributeOverride(name = "person_id", column = @Column(name = "id_destinatar"))
+	protected long idDestinatar;*/
 	public Destinatar(String cnp, String nume, String prenume, Adresa adresa, String eMail, String nrTelefon) {
 		super(cnp, nume, prenume, adresa, eMail, nrTelefon );
 	}

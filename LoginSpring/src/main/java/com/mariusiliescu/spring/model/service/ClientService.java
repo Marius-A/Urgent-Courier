@@ -55,7 +55,7 @@ public class ClientService {
 	public Client loginClient(String userId, String password) {
 		Client Client = this.findClient(userId);
 		
-		if(Client.getNume() == null)
+		if(Client == null)
 			return null;
 		if (Client != null && Client.getPassword().equals(password)) {
 			return Client;

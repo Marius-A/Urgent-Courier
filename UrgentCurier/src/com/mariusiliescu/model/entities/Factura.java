@@ -36,12 +36,16 @@ public class Factura {
 	private Double valoareEfectiva;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="codcomanda" , insertable = false, updatable = false)
+	@JoinColumn(name="idAngajat")
 	private Receptioner intemeietor;
 		
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "codcomanda")
 	private Comanda comanda;
+	
+	
+	
+	
 	
 	public Factura(Double valoareDiscount,
 			Receptioner intemeietor, Comanda comanda) {

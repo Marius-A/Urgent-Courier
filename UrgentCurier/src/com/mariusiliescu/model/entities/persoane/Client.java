@@ -14,14 +14,11 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 import com.mariusiliescu.model.entities.Factura;
 import com.mariusiliescu.model.entities.TipClient;
 
 @Entity
-@Table(name= "client")
-@Inheritance(strategy=InheritanceType.JOINED) //Least normalisation strategy 
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Client {
 	
 	@Id

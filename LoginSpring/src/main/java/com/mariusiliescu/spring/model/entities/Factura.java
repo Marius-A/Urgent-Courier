@@ -23,25 +23,29 @@ public class Factura {
 	};
 	@Id
     @GeneratedValue
-    @Column(name="COD_FACTURA")
+    @Column(name="cod_factura")
 	private long codFactura;
 	
-	@Column(name="VALOARE_TOTALA")
+	@Column(name="valoare_totala")
 	private Double valoareTotala;
 	
-	@Column(name="VALOARE_DISCOUNT")
+	@Column(name="valoare_disount")
 	private Double valoareDiscount;
 	
-	@Column(name="VALOARE_EVECTIVA")
+	@Column(name="valoare_efectiva")
 	private Double valoareEfectiva;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="ID_ANGAJAT")
+	@JoinColumn(name="idAngajat")
 	private Receptioner intemeietor;
 		
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "COD_COMANDA")
+    @JoinColumn(name = "codcomanda")
 	private Comanda comanda;
+	
+	
+	
+	
 	
 	public Factura(Double valoareDiscount,
 			Receptioner intemeietor, Comanda comanda) {

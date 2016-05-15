@@ -2,11 +2,10 @@ package com.mariusiliescu.spring.model.entities.persoane;
 
 import java.util.Date;
 
-import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
@@ -18,10 +17,10 @@ import com.mariusiliescu.spring.model.entities.Adresa;
 @Table(name = "angajat")
 @Inheritance(strategy=InheritanceType.JOINED)
 public class Angajat extends Persoana {
-
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "HB_SEQ_POJO_ONE")
-	@Column(name = "id_angajat")
-    @AttributeOverride(name = "PERSON_ID", column = @Column(name = "ID_ANGAJAT"))
+	@Id
+    @GeneratedValue
+	@Column(name = "idAngajat")
+   // @AttributeOverride(name = "person_id", column = @Column(name = "id_angajat"))
 	protected long idAngajat;
 	
     @Column(name = "data_angajarii")

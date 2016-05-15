@@ -51,7 +51,7 @@
 		id="entityManagerFactory">
 		<property name="persistenceUnitName" value="persistenceUnit" />
 		<property name="dataSource" ref="dataSource" />
-		      <property name="packagesToScan" value="org.baeldung.persistence.model" />
+		      <property name="packagesToScan" value="com.mariusiliescu.spring.model.entities" />
       <property name="jpaVendorAdapter">
          <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
       </property>

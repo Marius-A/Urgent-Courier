@@ -6,15 +6,15 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 
 import com.mariusiliescu.spring.model.entities.Adresa;
 
-@Entity
-@Table(name= "persoana")
-@Inheritance(strategy=InheritanceType.JOINED) //Least normalisation strategy 
+
+@MappedSuperclass
 public class Persoana {
-	@Id
+
     @Column(name = "person_id")
 	protected String cnp;
 	

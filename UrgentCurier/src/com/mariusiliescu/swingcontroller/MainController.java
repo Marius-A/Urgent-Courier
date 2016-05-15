@@ -57,6 +57,7 @@ public class MainController extends Observable{
 						Comanda c = new Comanda(new Date(),new Date(),model.getListaPachete().size()*10,model.getListaPachete(), view.getClient());
 						model.adaugareComanda(c);
 						hibernateUtil.addComanda(c);
+						
 						view.resetJList();
 						MainController.this.notifyObservers();
 						model.getListaPachete().removeAll(model.getListaPachete());

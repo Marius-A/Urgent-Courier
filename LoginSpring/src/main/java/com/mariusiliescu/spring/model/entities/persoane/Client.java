@@ -14,14 +14,12 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 import com.mariusiliescu.spring.model.entities.Factura;
 import com.mariusiliescu.spring.model.entities.TipClient;
 
 @Entity
-@Table(name= "client")
-@Inheritance(strategy=InheritanceType.JOINED) //Least normalisation strategy 
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Client {
 	
 	@Id
@@ -41,6 +39,8 @@ public abstract class Client {
 	}
 	
 	public abstract String getNume();
+	
+	public abstract String getSSNCUI();
 	
 	public abstract String getPassword();
 	

@@ -12,7 +12,7 @@ import com.mariusiliescu.model.entities.CategoriPermise;
 
 @Entity
 @Table(name="curier")
-@PrimaryKeyJoinColumn(name="id_angajat")
+@PrimaryKeyJoinColumn(name="idAngajat")
 public class Curier extends Angajat{
 	
 	@Enumerated(EnumType.STRING)

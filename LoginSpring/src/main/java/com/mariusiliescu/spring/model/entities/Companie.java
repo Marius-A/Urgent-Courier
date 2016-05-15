@@ -12,7 +12,7 @@ import com.mariusiliescu.spring.model.entities.persoane.Client;
 
 
 @Entity
-@Table(name= "companie")
+@Table(name= "Companie")
 @PrimaryKeyJoinColumn(name="id_client")
 public class Companie extends Client {
 	
@@ -112,6 +112,11 @@ public class Companie extends Client {
 	@Override
 	public void adaugareFactura(Factura f) {
 		this.listaFacturi.add(f);
+	}
+
+	@Override
+	public String getSSNCUI() {
+		return cui;
 	}
 		
 }

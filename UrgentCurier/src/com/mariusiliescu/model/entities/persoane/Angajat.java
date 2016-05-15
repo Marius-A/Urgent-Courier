@@ -5,11 +5,9 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.mariusiliescu.model.entities.Adresa;
@@ -18,10 +16,10 @@ import com.mariusiliescu.model.entities.Adresa;
 @Entity
 @Table(name = "angajat")
 @Inheritance(strategy=InheritanceType.JOINED)
-@PrimaryKeyJoinColumn(name="person_id")
 public class Angajat extends Persoana {
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "HB_SEQ_POJO_ONE")
-	@Column(name = "id_angajat")
+	@Id
+    @GeneratedValue
+	@Column(name = "idAngajat")
    // @AttributeOverride(name = "person_id", column = @Column(name = "id_angajat"))
 	protected long idAngajat;
 	

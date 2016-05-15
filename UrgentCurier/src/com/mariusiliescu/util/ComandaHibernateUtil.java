@@ -1,20 +1,26 @@
 package com.mariusiliescu.util;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import com.itextpdf.text.DocumentException;
+import com.mariusiliescu.model.entities.Adresa;
 import com.mariusiliescu.model.entities.Comanda;
 import com.mariusiliescu.model.entities.Companie;
+import com.mariusiliescu.model.entities.Factura;
 import com.mariusiliescu.model.entities.Pachet;
 import com.mariusiliescu.model.entities.persoane.Client;
 import com.mariusiliescu.model.entities.persoane.Destinatar;
 import com.mariusiliescu.model.entities.persoane.PersoanaExpeditoare;
+import com.mariusiliescu.model.entities.persoane.Receptioner;
 
 public class ComandaHibernateUtil {
 	
@@ -24,34 +30,49 @@ public class ComandaHibernateUtil {
 	HibernateTools hibernateTools = new HibernateTools();
 	
 	public void addComanda(Comanda c){
-/*		for(Pachet p : c.getListaPachete()){
-			if(!destinatarulExista(p.getDestinatar())){
-				hibernateTools.save(p.getDestinatar());//salvam destinatarii
-			}
-			hibernateTools.save(p);//salvam pachetele
-		}
-		if(c.getExpeditor() instanceof Companie){
-			if(!companiaExista((Companie)c.getExpeditor())){
-				hibernateTools.save((Companie)c.getExpeditor());//salvam compania expeditoare
-			}
-		}
-		if(c.getExpeditor() instanceof PersoanaExpeditoare){
-			if(!persFizicaExpExista((PersoanaExpeditoare)c.getExpeditor())){
-				hibernateTools.save((PersoanaExpeditoare)c.getExpeditor());//salvam persoana fizica expeditoare
-			}
-		}*/
 		List<Destinatar> listaDestinatariExistenti = getDestinatari();
 		List<Destinatar> listaDestinatariInserati = new ArrayList<>();
 		for(Pachet p : c.getListaPachete()){
-			for(Destinatar d : listaDestinatariExistenti){
-				if(!d.getCnp().equals(p.getDestinatar().getCnp())){
+			if(listaDestinatariExistenti.isEmpty()){
+				if(!listaDestinatariInserati.contains(p.getDestinatar()))
 					listaDestinatariInserati.add(p.getDestinatar());
+			}else{
+				for(Destinatar d : listaDestinatariExistenti){
+					if(!d.getCnp().equals(p.getDestinatar().getCnp())){
+						listaDestinatariInserati.add(p.getDestinatar());
+					}
 				}
 			}
 		}
 		for(Destinatar d : listaDestinatariInserati)
 			hibernateTools.save(d);
+		
 		hibernateTools.save(c);
+		
+		Comanda DBComanda = getComanda(c.getExpeditor().getSSNCUI());
+		@SuppressWarnings("deprecation")
+		Receptioner re = new Receptioner("19423412541225", "Dan", 
+				"Ion ", new Adresa(), "danion@uc.com", "0752312541", new Date(2000, 4, 6));
+		
+		Receptioner TMPReceptioner = re;
+		if(getReceptioner(re.getCnp()) == null){
+			hibernateTools.save(TMPReceptioner);
+			TMPReceptioner = getReceptioner(re.getCnp());
+		}else{
+			TMPReceptioner = getReceptioner(re.getCnp());
+		}
+		
+		
+		Factura f = new Factura(10.0,TMPReceptioner,DBComanda);
+		//hibernateTools.save(f);
+		
+		
+		try {
+			PDFBuilder.creareFactura(f);
+		} catch (IOException | DocumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	
@@ -61,6 +82,26 @@ public class ComandaHibernateUtil {
         
         return q.getSingleResult();
     }
+	@SuppressWarnings("unchecked")
+	public Comanda getComanda(String ssncui){
+		List<Comanda> list = hibernateTools.getSession().createCriteria(Comanda.class).list();
+		hibernateTools.getSession().close();
+		for (Comanda c : list){
+			if(c.getExpeditor().getSSNCUI().equals(ssncui))
+				return c;
+		}
+		return null;
+	}
+	@SuppressWarnings("unchecked")
+	public Receptioner getReceptioner(String cnp){
+		List<Receptioner> list = hibernateTools.getSession().createCriteria(Receptioner.class).list();
+		hibernateTools.getSession().close();
+		for (Receptioner c : list){
+			if(c.getCnp().equals(cnp))
+				return c;
+		}
+		return null;
+	}
 	
 	public boolean destinatarulExista(Destinatar d){
         TypedQuery<Destinatar> q = entityManager.createQuery("SELECT p FROM persoane AS p ,destinatari as o WHERE o.PERSON_ID = p.PERSON_ID", Destinatar.class);;
@@ -109,6 +150,7 @@ public class ComandaHibernateUtil {
 
 	public  Comanda getComanda(long idComanda){
 		Comanda c = (Comanda) hibernateTools.getSession().get(Comanda.class, idComanda);
+		hibernateTools.closeSessionFactory();
 		return c;
 	}
 	public <T> void save(T obj){

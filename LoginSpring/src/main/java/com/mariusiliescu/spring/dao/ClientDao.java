@@ -35,7 +35,7 @@ public class ClientDao {
     }
 
 	public List<Client> findAllClients() {
-        return entityManager.createQuery("SELECT o FROM client o", Client.class).getResultList();
+        return entityManager.createQuery("SELECT o FROM Client o", Client.class).getResultList();
     }
 
 	public Client findClient(Long id) {
@@ -44,7 +44,7 @@ public class ClientDao {
     }
 
 	public List<Client> findClientEntries(int firstResult, int maxResults) {
-        return entityManager.createQuery("SELECT o FROM client o", Client.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+        return entityManager.createQuery("SELECT o FROM Client o", Client.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
 
 	@Transactional
@@ -83,10 +83,15 @@ public class ClientDao {
 	public Client findClientsByNameEquals(String name) {
         if (name == null || name.length() == 0) throw new IllegalArgumentException("The name argument is required");
        
-        TypedQuery<Companie> q1 = entityManager.createQuery("SELECT o FROM companie AS o , client as c WHERE  o.id_client= c.id_client  AND o.numeC = :name", Companie.class);
+        TypedQuery<Companie> q1 = entityManager.createQuery("SELECT o FROM Companie AS o , Client as c WHERE  o.idClient= c.idClient  AND o.numeC = :name", Companie.class);
         q1.setParameter("name", name);
         
-        Client c = q1.getSingleResult();
+        Client c =null;
+        try {
+            c=q1.getSingleResult();
+		} catch (Exception e) {
+			System.out.println("error");
+		}
         
         //TODO if c == null -> there is no company with that name , .... check if is a person
         
