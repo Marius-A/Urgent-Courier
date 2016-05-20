@@ -6,10 +6,11 @@ import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JOptionPane;
+
 import com.itextpdf.text.DocumentException;
 import com.mariusiliescu.model.entities.Comanda;
 import com.mariusiliescu.model.entities.Factura;
-import com.mariusiliescu.model.entities.persoane.Receptioner;
 import com.mariusiliescu.util.ComandaHibernateUtil;
 import com.mariusiliescu.util.PDFBuilder;
 import com.mariusiliescu.view.vizualizarecomenzi.VizualizareComenzi;
@@ -46,11 +47,18 @@ public class ViewManageController implements Observer {
 				public void actionPerformed(ActionEvent e) {
 					String idComanda  = view.getViewComenzi().getSelectedRowOderId();
 					Comanda c = hib.getComanda(Long.parseLong(idComanda));
-					Factura f = new Factura(10.2, new Receptioner(), c);
-					try {
-						PDFBuilder.creareFactura(f);
-					} catch (IOException | DocumentException e1) {
-						e1.printStackTrace();
+					Factura f = hib.gasesteFactura(c);
+					if(f != null){
+						try {
+							PDFBuilder.creareFactura(f);
+						} catch (IOException | DocumentException e1) {
+							e1.printStackTrace();
+						}
+					}else{
+						JOptionPane.showMessageDialog(view,
+	                            "Factura nu a fost facuta",
+	                            "Factura ",
+	                            JOptionPane.ERROR_MESSAGE);
 					}
 				}
 			}, new ActionListener() {

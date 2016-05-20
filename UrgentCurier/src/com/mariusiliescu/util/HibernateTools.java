@@ -20,7 +20,7 @@ public class HibernateTools {
     }
     
 	public <T> void save(T obj){
-		Session session = sessionFactory.openSession();
+		Session session = getSession();
 		Transaction tx = null;
 		tx = session.beginTransaction();
 		session.saveOrUpdate(obj);
@@ -28,7 +28,7 @@ public class HibernateTools {
 		session.close();
 	}
 	public <T> void persist(T obj){
-		Session session = sessionFactory.openSession();
+		Session session = getSession();
 		Transaction tx = null;
 		tx = session.beginTransaction();
 		session.persist(obj);
@@ -37,7 +37,7 @@ public class HibernateTools {
 		session.close();
 	}
 	public <T> void delete(T obj){
-		Session session = sessionFactory.openSession();
+		Session session = getSession();
 		session.beginTransaction();
 		session.delete(obj);
 		session.getTransaction().commit();
@@ -45,7 +45,7 @@ public class HibernateTools {
 	}
 	
 	public <T> void update(T newObj){
-		Session session = sessionFactory.openSession();
+		Session session = getSession();
 		session.beginTransaction();
 		session.update(newObj);
 		session.getTransaction().commit();

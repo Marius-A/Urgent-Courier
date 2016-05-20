@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +20,6 @@ import com.mariusiliescu.model.entities.Factura;
 import com.mariusiliescu.model.entities.Pachet;
 import com.mariusiliescu.model.entities.persoane.Client;
 import com.mariusiliescu.model.entities.persoane.Destinatar;
-import com.mariusiliescu.model.entities.persoane.PersoanaExpeditoare;
 import com.mariusiliescu.model.entities.persoane.Receptioner;
 
 public class ComandaHibernateUtil {
@@ -47,9 +47,16 @@ public class ComandaHibernateUtil {
 		for(Destinatar d : listaDestinatariInserati)
 			hibernateTools.save(d);
 		
-		hibernateTools.save(c);
 		
-		Comanda DBComanda = getComanda(c.getExpeditor().getSSNCUI());
+		hibernateTools.save(c.getExpeditor());
+		Client cl = getClient(c.getExpeditor().getSSNCUI());
+		for(Factura f : gasesteFacturi(cl))
+			cl.adaugareFactura(f);
+			
+		c.setExpeditor(cl);
+		
+		
+		//Comanda DBComanda = getComanda(c.getExpeditor().getSSNCUI());
 		@SuppressWarnings("deprecation")
 		Receptioner re = new Receptioner("19423412541225", "Dan", 
 				"Ion ", new Adresa(), "danion@uc.com", "0752312541", new Date(2000, 4, 6));
@@ -62,9 +69,10 @@ public class ComandaHibernateUtil {
 			TMPReceptioner = getReceptioner(re.getCnp());
 		}
 		
+		Factura f = new Factura(10.0,TMPReceptioner,c);
+		f.getComanda().getExpeditor().adaugareFactura(f);
 		
-		Factura f = new Factura(10.0,TMPReceptioner,DBComanda);
-		//hibernateTools.save(f);
+		hibernateTools.save(f);
 		
 		
 		try {
@@ -77,25 +85,59 @@ public class ComandaHibernateUtil {
 	
 	
 	public Companie gasesteCompanie(Long id) {
+		hibernateTools.getSession().close();
 		TypedQuery<Companie> q = entityManager.createQuery("SELECT o FROM Destinatar AS o WHERE o.ID_CLIENT = :ID_CLIENT", Companie.class);
         q.setParameter("ID_CLIENT",id);
         
         return q.getSingleResult();
     }
 	@SuppressWarnings("unchecked")
-	public Comanda getComanda(String ssncui){
-		List<Comanda> list = hibernateTools.getSession().createCriteria(Comanda.class).list();
+	public Factura gasesteFactura(Comanda c) {
 		hibernateTools.getSession().close();
+		List<Factura> list = hibernateTools.getSession().createCriteria(Factura.class).list();
+        for(Factura f : list){
+        	if (f.getComanda().getCodComanda() == c.getCodComanda()){
+        		return f;
+        	}
+        }
+        return null;
+    }
+	@SuppressWarnings("unchecked")
+	public Collection<Factura> gasesteFacturi(Client c) {
+		List<Factura> listaFacturi = new ArrayList<>();
+		hibernateTools.getSession().close();
+		List<Factura> list = hibernateTools.getSession().createCriteria(Factura.class).list();
+        for(Factura f : list){
+        	if (f.getComanda().getExpeditor().getSSNCUI().equals(c.getSSNCUI())){
+        		listaFacturi.add(f);
+        	}
+        }
+        return listaFacturi;
+    }
+	@SuppressWarnings("unchecked")
+	public Comanda getComanda(String ssncui){
+		hibernateTools.getSession().close();
+		List<Comanda> list = hibernateTools.getSession().createCriteria(Comanda.class).list();
 		for (Comanda c : list){
 			if(c.getExpeditor().getSSNCUI().equals(ssncui))
 				return c;
 		}
 		return null;
 	}
+	public Client getClient(String cnpcui){
+		hibernateTools.getSession().close();
+		@SuppressWarnings("unchecked")
+		List<Client> list = hibernateTools.getSession().createCriteria(Client.class).list();
+		for (Client c : list){
+			if(c.getSSNCUI().equals(cnpcui))
+				return c;
+		}
+		return null;
+	}
 	@SuppressWarnings("unchecked")
 	public Receptioner getReceptioner(String cnp){
-		List<Receptioner> list = hibernateTools.getSession().createCriteria(Receptioner.class).list();
 		hibernateTools.getSession().close();
+		List<Receptioner> list = hibernateTools.getSession().createCriteria(Receptioner.class).list();
 		for (Receptioner c : list){
 			if(c.getCnp().equals(cnp))
 				return c;
@@ -103,45 +145,6 @@ public class ComandaHibernateUtil {
 		return null;
 	}
 	
-	public boolean destinatarulExista(Destinatar d){
-        TypedQuery<Destinatar> q = entityManager.createQuery("SELECT p FROM persoane AS p ,destinatari as o WHERE o.PERSON_ID = p.PERSON_ID", Destinatar.class);;
-        List<Destinatar> list = q.getResultList();
-        for(Destinatar dest : list){
-        	if(dest.getCnp().equals(d.getCnp()))
-        		return true;
-        	else
-        		return false;
-        }
-        return false;
-	}
-	public boolean clientulExista(Client c){
-		return true;
-	}
-	public boolean companiaExista(Companie c){
-        TypedQuery<Companie> q = entityManager.createQuery("SELECT o FROM Destinatar AS o WHERE o.cui = :cui", Companie.class);
-        q.setParameter("cui", c.getCui());
-        
-        return !q.getResultList().isEmpty();
-	}
-	public boolean persFizicaExpExista(PersoanaExpeditoare c){
-        TypedQuery<Companie> q = entityManager.createQuery("SELECT o FROM PersoanaFizica AS o WHERE o.cnp = :cnp", Companie.class);
-        q.setParameter("cnp", c.getCnp());
-        
-        return !q.getResultList().isEmpty();
-	}
-	
-	public List<Comanda> getComenzi(){
-		return entityManager.createQuery("SELECT o FROM Comanda o", Comanda.class).getResultList();
-	}
-	public  List<Pachet> getPachete(){
-		return entityManager.createQuery("SELECT o FROM Pachet o", Pachet.class).getResultList();
-	}
-	public  List<Client> getClienti(){
-		return entityManager.createQuery("SELECT o FROM Client o", Client.class).getResultList();
-	}
-	public  List<Companie> getCompanii(){
-		return entityManager.createQuery("SELECT o FROM Companie o", Companie.class).getResultList();
-	}
 	@SuppressWarnings("unchecked")
 	public  List<Destinatar> getDestinatari(){
 		List<Destinatar> list = hibernateTools.getSession().createCriteria(Destinatar.class).list();
@@ -150,7 +153,6 @@ public class ComandaHibernateUtil {
 
 	public  Comanda getComanda(long idComanda){
 		Comanda c = (Comanda) hibernateTools.getSession().get(Comanda.class, idComanda);
-		hibernateTools.closeSessionFactory();
 		return c;
 	}
 	public <T> void save(T obj){

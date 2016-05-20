@@ -106,7 +106,7 @@ public class PDFBuilder {
 		document.add(new Paragraph(" ")); 
 		
 		Font font = new Font(FontFamily.TIMES_ROMAN, 10.0f, Font.NORMAL, BaseColor.BLACK);
-        document.add(new Paragraph("Intocmit de :"+ f.getIntemeietor().getNume() + f.getIntemeietor().getNume()+" CNP :"+f.getIntemeietor().getCnp()+" E-mail :"+f.getIntemeietor().geteMail(),font));
+        document.add(new Paragraph("Intocmit de :"+ f.getIntemeietor().getNume() +" "+ f.getIntemeietor().getPrenume()+" CNP :"+f.getIntemeietor().getCnp()+" E-mail :"+f.getIntemeietor().geteMail(),font));
         
         DecimalFormat df = new DecimalFormat("0.00");
         //special font sizes
