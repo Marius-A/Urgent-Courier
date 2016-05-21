@@ -51,7 +51,7 @@ public class Factura {
 			Receptioner intemeietor, Comanda comanda) {
 		super();
 		this.valoareEfectiva = (double) comanda.getCostTransport();
-		this.valoareTotala = valoareEfectiva-valoareDiscount;
+		this.valoareTotala = valoareEfectiva-(valoareDiscount*valoareEfectiva);
 		this.valoareDiscount = valoareDiscount;
 		this.intemeietor = intemeietor;
 		this.comanda = comanda;

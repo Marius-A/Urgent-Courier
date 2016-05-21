@@ -141,7 +141,7 @@ public class PDFBuilder {
          insertCell(table3, "ABC00" + x, Element.ALIGN_LEFT, 1, bf12);
          insertCell(table3, "This is Customer Number ABC00" + x, Element.ALIGN_LEFT, 1, bf12);
          
-         orderTotal = Double.valueOf(df.format(Math.random() * 1000));
+         orderTotal = 2.3;
          total = total + orderTotal;
          insertCell(table, df.format(orderTotal), Element.ALIGN_RIGHT, 1, bf12);
          
@@ -161,7 +161,7 @@ public class PDFBuilder {
          insertCell(table3, "XYZ00" + x, Element.ALIGN_LEFT, 1, bf12);
          insertCell(table3, "This is Customer Number XYZ00" + x, Element.ALIGN_LEFT, 1, bf12);
          
-         orderTotal = Double.valueOf(df.format(Math.random() * 1000));
+         orderTotal = 0.4;
          total = total + orderTotal;
          insertCell(table3, df.format(orderTotal), Element.ALIGN_RIGHT, 1, bf12);
          

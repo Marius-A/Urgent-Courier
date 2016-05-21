@@ -2,27 +2,24 @@ package com.mariusiliescu.spring.model.entities.persoane;
 
 import java.util.Date;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.Table;
-
 import com.mariusiliescu.spring.model.entities.Adresa;
 
 
-
-
 @Entity
-@Table(name = "angajat")
 @Inheritance(strategy=InheritanceType.JOINED)
+@Access(value=AccessType.FIELD)
 public class Angajat extends Persoana {
 	@Id
     @GeneratedValue
 	@Column(name = "idAngajat")
-   // @AttributeOverride(name = "person_id", column = @Column(name = "id_angajat"))
 	protected long idAngajat;
 	
     @Column(name = "data_angajarii")

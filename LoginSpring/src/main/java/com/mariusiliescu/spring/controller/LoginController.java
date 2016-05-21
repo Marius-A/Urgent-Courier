@@ -40,29 +40,16 @@ public class LoginController {
         
 		//customerService.adaugareFacturi();
 		
-		Client customer = customerService.loginClient(userId, password);
+		//Client customer = customerService.loginClient(userId, password);
+		Client customer = customerService.getTmpClient();
 		if (customer == null) {
 			model.addAttribute("loginError", "Error logging in. Please try again");
 			return "login";
 		}
 		session.setAttribute("loggedInUser", customer);
 		
-	    AtomicInteger counter = (AtomicInteger) session.getAttribute("Count");
-	    if (counter == null) {
-	        counter = new AtomicInteger(60*15);
-	        session.setAttribute("Count", counter);
-	    }
-		
         return "redirect:home";
     }
-
-	@RequestMapping(value = "/{userId}")
-	public String getUserProfile(@PathVariable String userId, Map<String, Object> model) {
-		
-		Client customer = customerService.findClient(userId);
-		model.put("user", customer);
-		return "/view";
-	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) {

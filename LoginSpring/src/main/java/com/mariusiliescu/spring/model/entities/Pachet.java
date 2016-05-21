@@ -77,6 +77,14 @@ public class Pachet {
 	}
 	
 	
+	public Comanda getComanda() {
+		return comanda;
+	}
+
+	public void setComanda(Comanda comanda) {
+		this.comanda = comanda;
+	}
+
 	public long getCodPachet() {
 		return codPachet;
 	}
@@ -127,6 +135,6 @@ public class Pachet {
 
 	@Override
 	public String toString() {
-		return "Destinatar : "+destinatar.getNume()+" "+destinatar.getPrenume()+" Pachet: "+"cod "+getCodPachet()+" , "+getConditiiSpeciale().name();
+		return "Destinatar : "+destinatar.getNume()+" "+destinatar.getPrenume()+" Cod pachet : "+getCodPachet()+" , Conditii Speciale : "+getConditiiSpeciale().name();
 	}	
 }

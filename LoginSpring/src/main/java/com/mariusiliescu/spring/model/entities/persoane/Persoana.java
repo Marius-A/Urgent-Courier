@@ -1,14 +1,11 @@
 package com.mariusiliescu.spring.model.entities.persoane;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.MappedSuperclass;
 import com.mariusiliescu.spring.model.entities.Adresa;
 
 @MappedSuperclass
-@Access(AccessType.PROPERTY)
 public class Persoana {
 
     @Column(name = "person_id")

@@ -2,27 +2,19 @@
 	<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 		<persistence-unit name="persistenceUnit" transaction-type="JTA">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		
-	     	 <!-- <jta-data-source>Client</jta-data-source>	    
-	     	  <class>com.mariusiliescu.spring.model.entities.Adresa</class>
-	     	  <class>com.mariusiliescu.spring.model.entities.Comanda</class>
-	     	  <class>com.mariusiliescu.spring.model.entities.Companie</class>
-	     	  <class>com.mariusiliescu.spring.model.entities.Cursa</class>
-	     	  <class>com.mariusiliescu.spring.model.entities.Dimensiune</class>
-	     	  <class>com.mariusiliescu.spring.model.entities.Factura</class>
-	     	  <class>com.mariusiliescu.spring.model.entities.LoginData</class>
-	     	  <class>com.mariusiliescu.spring.model.entities.Pachet</class>
-	     	  <class>com.mariusiliescu.spring.model.entities.Ruta</class>
-	     	  <class>com.mariusiliescu.spring.model.entities.Sediu</class>
-	     	  <class>com.mariusiliescu.spring.model.entities.Vehicul</class>
-	     	  <class>com.mariusiliescu.spring.model.entities.persoane.Angajat</class>
-	     	  <class>com.mariusiliescu.spring.model.entities.persoane.Client</class>
-	     	  <class>com.mariusiliescu.spring.model.entities.persoane.Curier</class>
-	     	  <class>com.mariusiliescu.spring.model.entities.persoane.Destinatar</class>
-	     	  <class>com.mariusiliescu.spring.model.entities.persoane.Persoana</class>
-	     	  <class>com.mariusiliescu.spring.model.entities.persoane.PersoanaExpeditoare</class>
-	     	  <class>com.mariusiliescu.spring.model.entities.persoane.Receptioner</class>-->
-
+		<class>com.mariusiliescu.spring.model.entities.Adresa</class>
+		<class>com.mariusiliescu.spring.model.entities.Comanda</class>
+		<class>com.mariusiliescu.spring.model.entities.Companie</class>
+		<class>com.mariusiliescu.spring.model.entities.Cursa</class>
+		<class>com.mariusiliescu.spring.model.entities.Dimensiune</class>
+		<class>com.mariusiliescu.spring.model.entities.Factura</class>
+		<class>com.mariusiliescu.spring.model.entities.LoginData</class>
+		<class>com.mariusiliescu.spring.model.entities.Pachet</class>
+		<class>com.mariusiliescu.spring.model.entities.Ruta</class>
+		<class>com.mariusiliescu.spring.model.entities.Sediu</class>
+		<class>com.mariusiliescu.spring.model.entities.TipClient</class>
+		<class>com.mariusiliescu.spring.model.entities.Vehicul</class>
+	
 	     	  <exclude-unlisted-classes>false</exclude-unlisted-classes>
 	     	  <properties>
 	     	      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
@@ -30,7 +22,7 @@
 	     	      <property name="hibernate.hbm2ddl.auto" value="update"/>
 	     	      <property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>
 	     	      <property name="hibernate.connection.charSet" value="UTF-8"/>
-	     	      <property name = "hibernate.show_sql" value = "false" />
+	     	      <property name = "hibernate.show_sql" value = "true" />
 	     	      <property name="hibernate.enable_lazy_load_no_trans" value="true"/>
 	     	  </properties>
     </persistence-unit>

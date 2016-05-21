@@ -12,7 +12,6 @@ import com.mariusiliescu.spring.model.entities.LoginData;
 
 
 @Entity
-@Table(name= "receptioner")
 @PrimaryKeyJoinColumn(name="idAngajat")
 public class Receptioner extends Angajat {
 

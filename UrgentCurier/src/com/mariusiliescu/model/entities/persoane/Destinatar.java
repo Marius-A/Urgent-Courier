@@ -3,7 +3,6 @@ package com.mariusiliescu.model.entities.persoane;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.mariusiliescu.model.entities.Adresa;
@@ -14,7 +13,7 @@ import com.mariusiliescu.model.entities.Adresa;
 public class Destinatar extends Persoana {
 	@Id
 	@GeneratedValue
-	private long idDestinatar;
+	private int idDestinatar;
    /* @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "HB_SEQ_POJO_ONE")
 	@Column(name = "id_destinatar")
     @AttributeOverride(name = "person_id", column = @Column(name = "id_destinatar"))

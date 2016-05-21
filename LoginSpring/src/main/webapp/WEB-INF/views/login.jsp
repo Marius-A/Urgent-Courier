@@ -17,28 +17,16 @@
     <div class="header">
       <div class="container">
         <div class="login" style="width:200px;">
-        	<c:choose>
-				<c:when test="${empty loggedInUser.numeC }">
-					<form action='login' method="post" >
-						<div >
-							<input type="text" id="userId" name="userId" placeholder="Id-ul de client" class="form-control"/>
-						</div>
-						
-						<div>
-							<input type="password" id="password" name="password" placeholder="CNP-ul sau CUI-ul" class="form-control"/>
-						</div>
-						<button id="loginButton" class="form-control">Login</button>
-					</form>
-				</c:when>
-
-				<c:otherwise>
-					<h1><b>Hello : </b> ${loggedInUser.numeC}  <br/> <b>CUI:</b> ${loggedInUser.cui}! &nbsp;</h1>
-					<br/>
-					<form action="logout">
-					    <input class = "button-logout" type="submit" value="Logout">
-					</form>
-				</c:otherwise>
-			</c:choose>
+			<form action='login' method="post" >
+				<div >
+					<input type="text" id="userId" name="userId" placeholder="Id-ul de client" class="form-control"/>
+				</div>
+				
+				<div>
+					<input type="password" id="password" name="password" placeholder="CNP-ul sau CUI-ul" class="form-control"/>
+				</div>
+				<button id="loginButton" class="form-control">Login</button>
+			</form>
 		</div>
 		<a href="#" class="logo-icon">
           <img src="https://peli-pod.com/media/1027/courier-icon-green.png?width=150px&height=150px">

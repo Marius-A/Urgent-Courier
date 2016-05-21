@@ -38,7 +38,9 @@ public class ClientDao {
 	public List<Client> findAllClients() {
         return entityManager.createQuery("SELECT o FROM Client o", Client.class).getResultList();
     }
-
+	public List<Comanda> gasesteComenzile() {
+        return entityManager.createQuery("SELECT o FROM Comanda o", Comanda.class).getResultList();
+    }
 	public Client findClient(Long id) {
         if (id == null) return null;
         return entityManager.find(Client.class, id);
@@ -98,8 +100,8 @@ public class ClientDao {
     }
 	
 	public Client findClientsByNameEquals(String name) {
-        if (name == null || name.length() == 0) throw new IllegalArgumentException("The name argument is required");
-       
+ 
+        List<Comanda> listC = gasesteComenzile();
         TypedQuery<Companie> q1 = entityManager.createQuery("SELECT o FROM Companie AS o , Client as c WHERE  o.idClient= c.idClient  AND o.numeC = :name", Companie.class);
         q1.setParameter("name", name);
         
@@ -117,25 +119,4 @@ public class ClientDao {
         
         return c;
     }
-	
-	public void adaugareFacturi(){
-		Client cl = new Companie();
-		HashSet<Pachet> p = new HashSet<Pachet>();
-		p.add(new Pachet(20,
-				new Dimensiune(),SpecialConditions.fragile, StarePachet.inCursDeExpediere
-				, new Destinatar()));
-		
-		Comanda c = new Comanda(new Date(),
-				new Date(), 20, p, cl);
-		
-		cl.getListaFacturi().add(new Factura(20.0,
-				new Receptioner("19246523158", "Ion", "Matei", new Adresa(),
-						"csd@#sdcsd.com", "0545454545", new Date()) , c));
-		
-		cl.getListaFacturi().add(new Factura(20.0,
-				new Receptioner("4546626595", "Dan", "Ion", new Adresa(),
-						"csd@#sdcsd.com", "0545454545", new Date()) , c));
-		entityManager.persist(cl);
-		entityManager.flush();
-	}
 }

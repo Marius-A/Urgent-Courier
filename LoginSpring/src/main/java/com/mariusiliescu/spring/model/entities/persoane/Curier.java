@@ -11,7 +11,6 @@ import com.mariusiliescu.spring.model.entities.CategoriPermise;
 
 
 @Entity
-@Table(name="curier")
 @PrimaryKeyJoinColumn(name="idAngajat")
 public class Curier extends Angajat{
 	

@@ -125,6 +125,14 @@ public class Pachet {
 		this.destinatar = destinatar;
 	}
 
+	public Comanda getComanda() {
+		return comanda;
+	}
+
+	public void setComanda(Comanda comanda) {
+		this.comanda = comanda;
+	}
+
 	@Override
 	public String toString() {
 		return "Destinatar : "+destinatar.getNume()+" "+destinatar.getPrenume()+" Pachet: "+"cod "+getCodPachet()+" , "+getConditiiSpeciale().name();

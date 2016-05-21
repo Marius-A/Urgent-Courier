@@ -1,5 +1,7 @@
 package com.mariusiliescu.spring.model.entities.persoane;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -9,7 +11,7 @@ import com.mariusiliescu.spring.model.entities.Adresa;
 
 
 @Entity
-@Table(name="persoana_expeditoare")
+@Access(value=AccessType.FIELD)
 public class PersoanaExpeditoare extends Persoana{
 	
 	@Id

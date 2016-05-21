@@ -30,25 +30,34 @@ public class ComandaHibernateUtil {
 	HibernateTools hibernateTools = new HibernateTools();
 	
 	public void addComanda(Comanda c){
+		
 		List<Destinatar> listaDestinatariExistenti = getDestinatari();
 		List<Destinatar> listaDestinatariInserati = new ArrayList<>();
+		
+		for(Pachet p : c.getListaPachete()){
+			p.setComanda(c);
+		}
+		
 		for(Pachet p : c.getListaPachete()){
 			if(listaDestinatariExistenti.isEmpty()){
 				if(!listaDestinatariInserati.contains(p.getDestinatar()))
 					listaDestinatariInserati.add(p.getDestinatar());
 			}else{
 				for(Destinatar d : listaDestinatariExistenti){
-					if(!d.getCnp().equals(p.getDestinatar().getCnp())){
+					if(!(p.getDestinatar().getCnp().equals(d.getCnp()))){
 						listaDestinatariInserati.add(p.getDestinatar());
 					}
 				}
 			}
 		}
+		
+		
 		for(Destinatar d : listaDestinatariInserati)
 			hibernateTools.save(d);
 		
 		
 		hibernateTools.save(c.getExpeditor());
+		
 		Client cl = getClient(c.getExpeditor().getSSNCUI());
 		for(Factura f : gasesteFacturi(cl))
 			cl.adaugareFactura(f);
@@ -68,6 +77,7 @@ public class ComandaHibernateUtil {
 		}else{
 			TMPReceptioner = getReceptioner(re.getCnp());
 		}
+		
 		
 		Factura f = new Factura(10.0,TMPReceptioner,c);
 		f.getComanda().getExpeditor().adaugareFactura(f);
