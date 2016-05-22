@@ -274,7 +274,7 @@ body {
 	</div>
 
 	<div class="slider-nav">
-		<a href="#" class="arrow-prev"><img
+		<a class="arrow-prev"><img
 			src="http://s3.amazonaws.com/codecademy-content/courses/ltp2/img/flipboard/arrow-prev.png"
 			alt=""></a>
 		<ul class="slider-dots">
@@ -284,7 +284,7 @@ body {
 			<li class="dot">&bull;</li>
 			<li class="dot">&bull;</li>
 		</ul>
-		<a href="#" id="slideb" class="arrow-next"><img
+		<a id="slideb" class="arrow-next"><img
 			src="http://s3.amazonaws.com/codecademy-content/courses/ltp2/img/flipboard/arrow-next.png"
 			alt=""></a>
 	</div>

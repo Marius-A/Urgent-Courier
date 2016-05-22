@@ -9,7 +9,6 @@ import javax.swing.JRadioButton;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class VizualizareComenzi extends JPanel {
@@ -30,11 +29,11 @@ public class VizualizareComenzi extends JPanel {
 	
 	private void initComponents(){
 		comenzi = new ViewComenzi();
-		comenzi.setBackground(Color.RED);
+		//comenzi.setBackground(Color.RED);
 		pachete = new ViewPachete();
-		pachete.setBackground(Color.GREEN);
+		//pachete.setBackground(Color.GREEN);
 		clienti = new ViewClienti();
-		clienti.setBackground(Color.BLUE);
+		//clienti.setBackground(Color.BLUE);
 		cLayout = new CardLayout();
 		tabPanel = new JPanel();
 		

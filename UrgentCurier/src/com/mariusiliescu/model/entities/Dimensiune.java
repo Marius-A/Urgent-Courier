@@ -46,4 +46,10 @@ public class Dimensiune {
 	public void setLungime(float lungime) {
 		this.lungime = lungime;
 	}
+	@Override
+	public String toString() {
+		return "H: " + inaltime + " W: " + latime + " L: " + lungime + "";
+	}
+	
+	
 }

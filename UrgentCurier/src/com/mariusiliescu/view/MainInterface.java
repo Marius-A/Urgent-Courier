@@ -6,6 +6,7 @@ import javax.swing.JToolBar;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -117,7 +118,8 @@ public class MainInterface extends JFrame {
 		manageOrders.setLayout(new BoxLayout(manageOrders, BoxLayout.Y_AXIS));
 		setTabAddLayout();
 		setTabViewLayout();
-		this.pack();
+		this.setMinimumSize(new Dimension(1200, 600));
+		this.setMaximumSize(new Dimension(1200, 600));
 	}
 	
 	private void setTabAddLayout(){

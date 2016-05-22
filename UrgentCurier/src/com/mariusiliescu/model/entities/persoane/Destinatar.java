@@ -49,6 +49,12 @@ public class Destinatar extends Persoana {
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return this.getNume()+" "+ this.getPrenume() + " Jud. "+getAdresa().getJudet()+
+				" Loc. "+getAdresa().getLocalitate() +" Str. "+getAdresa().getStrada()+
+				" Nr. "+getAdresa().getNumar();
+	}
 
-
+	
 }

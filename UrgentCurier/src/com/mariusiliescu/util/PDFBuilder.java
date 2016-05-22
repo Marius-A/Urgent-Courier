@@ -4,8 +4,6 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.DecimalFormat;
-
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -25,6 +23,7 @@ import com.itextpdf.tool.xml.ElementList;
 import com.itextpdf.tool.xml.XMLWorkerHelper;
 import com.mariusiliescu.model.entities.Comanda;
 import com.mariusiliescu.model.entities.Factura;
+import com.mariusiliescu.model.entities.Pachet;
 
 public class PDFBuilder {
 	public static void creareFactura(Factura f) throws IOException, DocumentException{
@@ -108,66 +107,41 @@ public class PDFBuilder {
 		Font font = new Font(FontFamily.TIMES_ROMAN, 10.0f, Font.NORMAL, BaseColor.BLACK);
         document.add(new Paragraph("Intocmit de :"+ f.getIntemeietor().getNume() +" "+ f.getIntemeietor().getPrenume()+" CNP :"+f.getIntemeietor().getCnp()+" E-mail :"+f.getIntemeietor().geteMail(),font));
         
-        DecimalFormat df = new DecimalFormat("0.00");
+        
+       
         //special font sizes
-        Font bfBold12 = new Font(FontFamily.TIMES_ROMAN, 12, Font.BOLD, new BaseColor(0, 0, 0)); 
-        Font bf12 = new Font(FontFamily.TIMES_ROMAN, 12); 
+        Font bfBold11 = new Font(FontFamily.TIMES_ROMAN, 11, Font.BOLD, new BaseColor(0, 0, 0)); 
+        Font bf10 = new Font(FontFamily.TIMES_ROMAN,10); 
+        Font bf8 = new Font(FontFamily.TIMES_ROMAN,8); 
         
         Paragraph paragraph = new Paragraph(" ");
         
-        float[] columnWidths = {1.5f, 2f, 5f, 2f};
+        float[] columnWidths = {2f, 1.5f, 2f, 2f,5f};
         //create PDF table with the given widths
         PdfPTable table3 = new PdfPTable(columnWidths);
         // set table width a percentage of the page width
         table3.setWidthPercentage(90f);
 
         //insert column headings
-        insertCell(table3, "Order No", Element.ALIGN_RIGHT, 1, bfBold12);
-        insertCell(table, "Account No", Element.ALIGN_LEFT, 1, bfBold12);
-        insertCell(table, "Account Name", Element.ALIGN_LEFT, 1, bfBold12);
-        insertCell(table, "Order Total", Element.ALIGN_RIGHT, 1, bfBold12);
-        table.setHeaderRows(1);
+        insertCell(table3, "Cod Pachet", Element.ALIGN_CENTER, 1, bfBold11);
+        insertCell(table3, "Greutate", Element.ALIGN_CENTER, 1, bfBold11);
+        insertCell(table3, "Dimensiune", Element.ALIGN_CENTER, 1, bfBold11);
+        insertCell(table3, "Conditii Speciale", Element.ALIGN_CENTER, 1, bfBold11);
+        insertCell(table3, "Destinatar", Element.ALIGN_CENTER, 1, bfBold11);
+        table3.setHeaderRows(1);
+        
+        
+        for(Pachet p : c.getListaPachete()){
+            insertCell(table3,(String) p.getCodPachet().toString(), Element.ALIGN_LEFT, 1, bf10);
+            insertCell(table3, p.getGreutate().toString(),  Element.ALIGN_LEFT, 1, bf10);
+            insertCell(table3, p.getDimensiune().toString(), Element.ALIGN_LEFT, 1, bf8);
+            insertCell(table3, p.getConditiiSpeciale().name(),  Element.ALIGN_LEFT, 1, bf10);
+            insertCell(table3, p.getDestinatar().toString(),  Element.ALIGN_LEFT, 1, bf8);
+        }
 
-        //insert an empty row
-        insertCell(table3, "", Element.ALIGN_LEFT, 4, bfBold12);
-        //create section heading by cell merging
-        insertCell(table3, "New York Orders ...", Element.ALIGN_LEFT, 4, bfBold12);
-        double orderTotal, total = 0;
+      
+      
         
-        //just some random data to fill 
-        for(int x=1; x<5; x++){
-         
-         insertCell(table3, "10010" + x, Element.ALIGN_RIGHT, 1, bf12);
-         insertCell(table3, "ABC00" + x, Element.ALIGN_LEFT, 1, bf12);
-         insertCell(table3, "This is Customer Number ABC00" + x, Element.ALIGN_LEFT, 1, bf12);
-         
-         orderTotal = 2.3;
-         total = total + orderTotal;
-         insertCell(table, df.format(orderTotal), Element.ALIGN_RIGHT, 1, bf12);
-         
-        }
-        //merge the cells to create a footer for that section
-        insertCell(table3, "New York Total...", Element.ALIGN_RIGHT, 3, bfBold12);
-        insertCell(table, df.format(total), Element.ALIGN_RIGHT, 1, bfBold12);
-        
-        //repeat the same as above to display another location
-        insertCell(table3, "", Element.ALIGN_LEFT, 4, bfBold12);
-        insertCell(table3, "California Orders ...", Element.ALIGN_LEFT, 4, bfBold12);
-        orderTotal = 0;
-        
-        for(int x=1; x<7; x++){
-         
-         insertCell(table3, "20020" + x, Element.ALIGN_RIGHT, 1, bf12);
-         insertCell(table3, "XYZ00" + x, Element.ALIGN_LEFT, 1, bf12);
-         insertCell(table3, "This is Customer Number XYZ00" + x, Element.ALIGN_LEFT, 1, bf12);
-         
-         orderTotal = 0.4;
-         total = total + orderTotal;
-         insertCell(table3, df.format(orderTotal), Element.ALIGN_RIGHT, 1, bf12);
-         
-        }
-        insertCell(table3, "California Total...", Element.ALIGN_RIGHT, 3, bfBold12);
-        insertCell(table3, df.format(total), Element.ALIGN_RIGHT, 1, bfBold12);
         
         //add the PDF table to the paragraph 
         paragraph.add(table3);
@@ -180,10 +154,16 @@ public class PDFBuilder {
 		document.close(); 
 		open(new File("resources/factura.pdf"));	
 	}
+	
+	
+	
 	public static void open(File document) throws IOException {
 	    Desktop dt = Desktop.getDesktop();
 	    dt.open(document);
 	}
+	
+	
+	
 	private static void insertCell(PdfPTable table, String text, int align, int colspan, Font font){
 		  
 		  //create a new cell with the specified Text and Font

@@ -77,7 +77,7 @@ public class Pachet {
 	}
 	
 	
-	public long getCodPachet() {
+	public Long getCodPachet() {
 		return codPachet;
 	}
 
@@ -85,7 +85,7 @@ public class Pachet {
 		this.codPachet = codPachet;
 	}
 
-	public float getGreutate() {
+	public Float getGreutate() {
 		return greutate;
 	}
 
