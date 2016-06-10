@@ -5,7 +5,7 @@
 For the *web* app I used **Spring MVC** , and for *deskto* app I used **Swing** (for interface) , **Itext**(to create invoices ) , and for interacting withh the database I used **Hibernate**.
 
 *Database E-R model.* 
-![alt text1](http://s33.postimg.org/lrjzqfpa7/diagram_png_Page_1.png "1")
+![alt text1](http://s33.postimg.org/qdsihw05b/diagram_png_Page_1_Copy.png "1")
 
 ### WEB ###
 
