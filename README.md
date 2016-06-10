@@ -2,7 +2,7 @@
 
 **Urgent Courier** is actually made up of two java applications (web and desktop).
 
-For the *web* app I used **Spring MVC** , and for *desktop* app I used **Swing** (for the user interface) , **Itext**(to create invoices ) , and for interacting withh the database I used **Hibernate**.
+For the *web* app I used **Spring MVC** , and for *desktop* app I used **Swing** (for the user interface) , **Itext**(to create invoices ) , and to interract with the database I used **Hibernate**.
 
 *Database E-R model.* 
 ![alt text1](http://s33.postimg.org/qdsihw05b/diagram_png_Page_1_Copy.png "1")
