@@ -4,6 +4,9 @@
 
 For the *web* app I used **Spring MVC** , and for *deskto* app I used **Swing** (for interface) , **Itext**(to create invoices ) , and for interacting withh the database I used **Hibernate**.
 
+*Database E-R model.* 
+![alt text1](http://s33.postimg.org/lrjzqfpa7/diagram_png_Page_1.png "1")
+
 ### WEB ###
 
 * The *web* application can be used by customers for the courier company to be able to see the status of their orders and invoices.
@@ -14,6 +17,10 @@ For the *web* app I used **Spring MVC** , and for *deskto* app I used **Swing** 
 
 
 ![alt text1](http://s33.postimg.org/jqc7z2ny7/image.jpg "1")
+
+
+![alt text1](http://s33.postimg.org/rd8pjd2nz/Untitled.png"1")
+
 
 
 ### Desktop ###
